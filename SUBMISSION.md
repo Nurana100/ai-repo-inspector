@@ -50,7 +50,7 @@ I used Claude as a pair-programmer. It proposed the investigation order and wrot
 - `npm run inspector -- review --repo . --base-ref afcf30d --format json`: wrote `review-report.json` listing all 16 changed files with correct statuses.
 - `npm run inspector -- review --rpo x`: printed `Unknown argument: --rpo` and the usage line.
 - `npm run build`, `dir dist`: showed only `src` and `test`, which confirmed the `bin` bug. After the fix, `node dist\src\cli.js review --rpo x` ran correctly.
-- GitHub Actions ("Public checks", Linux, Node 20): all 8 runs green, including the final commit with this file.
+- GitHub Actions ("Public checks", Linux, Node 20): all 9 runs green, including the final commit with this file.
 - Not test-first for validation: a machine restart interrupted that step, so I ran those tests after writing the code. The schema fix was test-first (red, then green).
 
 ## A blocker you hit and how you approached it
