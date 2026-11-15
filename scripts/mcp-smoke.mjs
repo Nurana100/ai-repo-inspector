@@ -7,9 +7,23 @@ const transport = new StdioClientTransport({
 });
 const client = new Client({ name: "smoke", version: "1.0.0" });
 await client.connect(transport);
-console.log(JSON.stringify(await client.listTools(), null, 2));
+
+const tools = await client.listTools();
+console.log("Schema properties:", Object.keys(tools.tools[0].inputSchema.properties));
+
+console.log("--- new key (repoPath) ---");
 console.log(JSON.stringify(await client.callTool({
   name: "review_repository",
-  arguments: { repo_path: "C:\\Users\\quxay\\ai-repo-inspector" },
+  arguments: { repoPath: "C:\\Users\\quxay\\ai-repo-inspector" },
 }), null, 2));
+
+console.log("--- old key (repo_path) ---");
+try {
+  console.log(JSON.stringify(await client.callTool({
+    name: "review_repository",
+    arguments: { repo_path: "C:\\Users\\quxay\\ai-repo-inspector" },
+  }), null, 2));
+} catch (e) {
+  console.log("Rejected:", e.message);
+}
 await client.close();
