@@ -17,4 +17,13 @@ describe("review input contract", () => {
   it("rejects an empty repoPath", () => {
     expect(reviewInput.safeParse({ repoPath: "" }).success).toBe(false);
   });
+
+  it("maps preset names to server-defined commands", () => {
+    const req = toReviewRequest(reviewInput.parse({ repoPath: "/r", validations: ["test"] }));
+    expect(req.validationCommands).toEqual(["npm test"]);
+  });
+
+  it("rejects free-form commands", () => {
+    expect(reviewInput.safeParse({ repoPath: "/r", validations: ["rm -rf /"] }).success).toBe(false);
+  });
 });
