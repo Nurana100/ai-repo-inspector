@@ -98,7 +98,7 @@
 
 # \- `npm run build`, `dir dist`: showed only `src` and `test`, which confirmed the `bin` bug. After the fix, `node dist\\src\\cli.js review --rpo x` ran correctly.
 
-# \- GitHub Actions: green on Linux with Node 20 after the validation commit. I did not re-check it for the later commits.
+# \- GitHub Actions ("Public checks", Linux, Node 20): all 8 runs green, including the final commit with this file.
 
 # \- Not test-first for validation: a machine restart interrupted that step, so I ran those tests after writing the code. The schema fix was test-first (red, then green).
 
